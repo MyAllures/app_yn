@@ -1,0 +1,692 @@
+{
+  "nested": {
+    "trade_api": {
+      "nested": {
+        "ApiId": {
+          "values": {
+            "HEARTBEAT": 0,
+            "ACCOUNT_LOGON": 1,
+            "ACCOUNT_LOGON_VERIFY": 2,
+            "CREATE_ORDER": 3,
+            "CANCEL_ORDER": 4,
+            "QUERY_ACCOUNT_ORDER": 5,
+            "ACCOUNT_ORDER_PUSH": 6,
+            "QUERY_ACCOUNT_TRADE": 7,
+            "ACCOUNT_TRADE_PUSH": 8,
+            "QUERY_ACCOUNT_POSITION": 9,
+            "ACCOUNT_POSITION_PUSH": 10,
+            "ACCOUNT_BALANCE_PUSH": 11,
+            "QUERY_SYMBOL_LIST": 12,
+            "ACCOUNT_SYMBOL_SETTINGS_PUSH": 13,
+            "QUERY_SYMBOL_CLASS_LIST": 14
+          }
+        },
+        "ErrorCode": {
+          "values": {
+            "OK": 0,
+            "ACCOUNT_BALANCE_LACK": 1,
+            "ACCOUNT_ID_NOT_FOUND": 2,
+            "SYMBOL_CLOSE": 3,
+            "PRICE_INPUT_ERROR": 4,
+            "DIRECTION_INPUT_ERROR": 5,
+            "ORDER_TYPE_INPUT_ERROR": 6,
+            "QTY_INPUT_ERROR": 7,
+            "CANCEL_ORDER_ID_NOT_FOUND": 8,
+            "ORDER_ALREADY_CANCEL_OR_FILLED": 9
+          }
+        },
+        "HeartbeatRequest": {
+          "fields": {}
+        },
+        "HeartbeatResponse": {
+          "fields": {}
+        },
+        "AccountLogonRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "clientVersion": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "AccountLogonResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "errorCode": {
+              "type": "ErrorCode",
+              "id": 2
+            },
+            "errorMessage": {
+              "type": "string",
+              "id": 3
+            },
+            "rnd": {
+              "type": "string",
+              "id": 4
+            },
+            "sess": {
+              "type": "string",
+              "id": 5
+            }
+          }
+        },
+        "AccountLogonVerifyRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "rnd": {
+              "type": "string",
+              "id": 2
+            },
+            "sess": {
+              "type": "string",
+              "id": 3
+            },
+            "logonId": {
+              "type": "string",
+              "id": 4
+            },
+            "password": {
+              "type": "string",
+              "id": 5
+            }
+          }
+        },
+        "AccountLogonVerifyResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "errorCode": {
+              "type": "ErrorCode",
+              "id": 2
+            },
+            "errorMessage": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "Direction": {
+          "values": {
+            "BUY": 0,
+            "SELL": 1
+          }
+        },
+        "OrderType": {
+          "values": {
+            "MARKET_ORDER": 0,
+            "LIMIT_ORDER": 1
+          }
+        },
+        "OrderStatus": {
+          "values": {
+            "PENDING_SUBMIT": 0,
+            "PRE_SUBMITTED": 1,
+            "SUBMITTED": 2,
+            "FILLED": 3,
+            "CANCELLED": 4
+          }
+        },
+        "CreateOrderRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "accountId": {
+              "type": "string",
+              "id": 2
+            },
+            "symbol": {
+              "type": "string",
+              "id": 3
+            },
+            "direction": {
+              "type": "Direction",
+              "id": 4
+            },
+            "orderType": {
+              "type": "OrderType",
+              "id": 5
+            },
+            "limitPrice": {
+              "type": "double",
+              "id": 6
+            },
+            "qty": {
+              "type": "int32",
+              "id": 7
+            },
+            "timestamp": {
+              "type": "int32",
+              "id": 8
+            }
+          }
+        },
+        "CreateOrderResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "errorCode": {
+              "type": "ErrorCode",
+              "id": 2
+            },
+            "orderNo": {
+              "type": "string",
+              "id": 3
+            },
+            "errorMessage": {
+              "type": "string",
+              "id": 4
+            }
+          }
+        },
+        "CancelOrderRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbol": {
+              "type": "string",
+              "id": 2
+            },
+            "orderNo": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "CancelOrderResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "errorCode": {
+              "type": "ErrorCode",
+              "id": 2
+            },
+            "errorMessage": {
+              "type": "string",
+              "id": 3
+            },
+            "orderNo": {
+              "type": "string",
+              "id": 4
+            }
+          }
+        },
+        "Order": {
+          "fields": {
+            "orderNo": {
+              "type": "string",
+              "id": 1
+            },
+            "symbol": {
+              "type": "string",
+              "id": 2
+            },
+            "direction": {
+              "type": "Direction",
+              "id": 3
+            },
+            "orderType": {
+              "type": "OrderType",
+              "id": 4
+            },
+            "price": {
+              "type": "double",
+              "id": 5
+            },
+            "qty": {
+              "type": "int32",
+              "id": 6
+            },
+            "orderStatus": {
+              "type": "OrderStatus",
+              "id": 7
+            },
+            "inputDatetime": {
+              "type": "string",
+              "id": 8
+            },
+            "tradedQty": {
+              "type": "int32",
+              "id": 9
+            }
+          }
+        },
+        "SubscribeAccountOrder": {
+          "fields": {
+            "subscribe": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "AccountOrderPush": {
+          "fields": {
+            "order": {
+              "type": "Order",
+              "id": 1
+            }
+          }
+        },
+        "QueryAccountOrderRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            }
+          }
+        },
+        "QueryAccountOrderResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "orders": {
+              "rule": "repeated",
+              "type": "Order",
+              "id": 2
+            }
+          }
+        },
+        "Trade": {
+          "fields": {
+            "tradeId": {
+              "type": "string",
+              "id": 1
+            },
+            "orderNo": {
+              "type": "string",
+              "id": 2
+            },
+            "symbol": {
+              "type": "string",
+              "id": 3
+            },
+            "direction": {
+              "type": "Direction",
+              "id": 4
+            },
+            "price": {
+              "type": "double",
+              "id": 5
+            },
+            "qty": {
+              "type": "int32",
+              "id": 6
+            },
+            "commission": {
+              "type": "double",
+              "id": 7
+            },
+            "settledCommission": {
+              "type": "double",
+              "id": 8
+            },
+            "datetime": {
+              "type": "string",
+              "id": 9
+            }
+          }
+        },
+        "SubscribeAccountTrade": {
+          "fields": {
+            "subscribe": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "AccountTradePush": {
+          "fields": {
+            "trade": {
+              "type": "Trade",
+              "id": 1
+            }
+          }
+        },
+        "QueryAccountTradeRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            }
+          }
+        },
+        "QueryAccountTradeResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "trades": {
+              "rule": "repeated",
+              "type": "Trade",
+              "id": 2
+            }
+          }
+        },
+        "PositionItem": {
+          "fields": {
+            "symbol": {
+              "type": "string",
+              "id": 1
+            },
+            "direction": {
+              "type": "Direction",
+              "id": 2
+            },
+            "averagePrice": {
+              "type": "double",
+              "id": 3
+            },
+            "position": {
+              "type": "int32",
+              "id": 4
+            },
+            "closeablePosition": {
+              "type": "int32",
+              "id": 5
+            },
+            "margin": {
+              "type": "double",
+              "id": 6
+            }
+          }
+        },
+        "SubscribeAccountPosition": {
+          "fields": {
+            "subscribe": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "AccountPositionPush": {
+          "fields": {
+            "position": {
+              "type": "PositionItem",
+              "id": 1
+            }
+          }
+        },
+        "QueryAccountPositionRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            }
+          }
+        },
+        "QueryAccountPositionResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "positions": {
+              "rule": "repeated",
+              "type": "PositionItem",
+              "id": 2
+            }
+          }
+        },
+        "SubscribeAccountBalance": {
+          "fields": {
+            "subscribe": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "AccountBalancePush": {
+          "fields": {
+            "cashBalance": {
+              "type": "double",
+              "id": 1
+            },
+            "clientMargin": {
+              "type": "double",
+              "id": 2
+            },
+            "todayProfitLoss": {
+              "type": "double",
+              "id": 3
+            },
+            "todayCommission": {
+              "type": "double",
+              "id": 4
+            },
+            "frozenCommission": {
+              "type": "double",
+              "id": 5
+            }
+          }
+        },
+        "QueryAccountStopLossListRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "accountId": {
+              "type": "string",
+              "id": 2
+            },
+            "symbol": {
+              "type": "string",
+              "id": 3
+            },
+            "version": {
+              "type": "int32",
+              "id": 4
+            }
+          }
+        },
+        "QueryAccountStopLossListResponse": {
+          "fields": {
+            "symbol": {
+              "type": "string",
+              "id": 1
+            },
+            "stopLossList": {
+              "type": "StopLossData",
+              "id": 2
+            }
+          },
+          "nested": {
+            "StopLossData": {
+              "fields": {
+                "seqNo": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "stopLoss": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "margin": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "QuerySymbolListRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            }
+          }
+        },
+        "QuerySymbolListResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbols": {
+              "rule": "repeated",
+              "type": "SymbolInfo",
+              "id": 2
+            }
+          },
+          "nested": {
+            "SymbolInfo": {
+              "fields": {
+                "symbol": {
+                  "type": "string",
+                  "id": 1
+                },
+                "decimal": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "currency": {
+                  "type": "string",
+                  "id": 3
+                },
+                "exchange": {
+                  "type": "string",
+                  "id": 4
+                },
+                "symbolClass": {
+                  "type": "string",
+                  "id": 5
+                },
+                "expiryDate": {
+                  "type": "string",
+                  "id": 6
+                },
+                "enSymbolName": {
+                  "type": "string",
+                  "id": 7
+                },
+                "cnSymbolName": {
+                  "type": "string",
+                  "id": 8
+                },
+                "twSymbolName": {
+                  "type": "string",
+                  "id": 9
+                },
+                "multiplier": {
+                  "type": "int32",
+                  "id": 10
+                }
+              }
+            }
+          }
+        },
+        "SubscribeAccountSymbolSettings": {
+          "fields": {
+            "subscribe": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "AccountSymbolSettingsPush": {
+          "fields": {
+            "currency": {
+              "type": "string",
+              "id": 1
+            },
+            "currencyRate": {
+              "type": "double",
+              "id": 2
+            },
+            "settings": {
+              "rule": "repeated",
+              "type": "Settings",
+              "id": 3
+            }
+          },
+          "nested": {
+            "Settings": {
+              "fields": {
+                "symbol": {
+                  "type": "string",
+                  "id": 1
+                },
+                "margin": {
+                  "type": "double",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "QuerySymbolClassListRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            }
+          }
+        },
+        "SymbolClassDetail": {
+          "fields": {
+            "symbolClass": {
+              "type": "string",
+              "id": 1
+            },
+            "futureType": {
+              "type": "string",
+              "id": 2
+            },
+            "exchange": {
+              "type": "string",
+              "id": 3
+            },
+            "decimal": {
+              "type": "int32",
+              "id": 4
+            },
+            "currency": {
+              "type": "string",
+              "id": 5
+            },
+            "multiplier": {
+              "type": "int32",
+              "id": 6
+            }
+          }
+        },
+        "QuerySymbolClassListResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "details": {
+              "rule": "repeated",
+              "type": "SymbolClassDetail",
+              "id": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}

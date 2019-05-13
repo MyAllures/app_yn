@@ -1,0 +1,333 @@
+﻿syntax = "proto3";
+package trade_api;
+
+enum ApiId {
+  HEARTBEAT = 0;
+  ACCOUNT_LOGON = 1;
+  ACCOUNT_LOGON_VERIFY = 2;
+  CREATE_ORDER = 3;
+  CANCEL_ORDER = 4;
+  QUERY_ACCOUNT_ORDER = 5;
+  ACCOUNT_ORDER_PUSH = 6;
+  QUERY_ACCOUNT_TRADE = 7;
+  ACCOUNT_TRADE_PUSH = 8;
+  QUERY_ACCOUNT_POSITION = 9;
+  ACCOUNT_POSITION_PUSH = 10;
+  ACCOUNT_BALANCE_PUSH = 11;
+  QUERY_SYMBOL_LIST = 12;
+  ACCOUNT_SYMBOL_SETTINGS_PUSH = 13;
+  QUERY_SYMBOL_CLASS_LIST = 14;
+}
+
+enum ErrorCode {
+  OK = 0;
+  ACCOUNT_BALANCE_LACK = 1;
+  ACCOUNT_ID_NOT_FOUND = 2;
+  SYMBOL_CLOSE = 3;
+  PRICE_INPUT_ERROR = 4;
+  DIRECTION_INPUT_ERROR = 5;
+  ORDER_TYPE_INPUT_ERROR = 6;
+  QTY_INPUT_ERROR = 7;
+  CANCEL_ORDER_ID_NOT_FOUND = 8;
+  ORDER_ALREADY_CANCEL_OR_FILLED = 9;
+}
+
+message HeartbeatRequest {}
+
+message HeartbeatResponse {}
+
+// 发起登录请求
+message AccountLogonRequest {
+  int32 request_id = 1;
+  // 终端APP版本标识,可用于API协议判断
+  string client_version = 2;
+}
+
+message AccountLogonResponse {
+  int32 request_id = 1;
+  ErrorCode error_code = 2;
+  string error_message = 3;
+  // 服务器随机生成加密Key1
+  string rnd = 4;
+  // 服务器随机生成加密Key2
+  string sess = 5;
+}
+
+message AccountLogonVerifyRequest {
+  int32 request_id = 1;
+  // 由AccountLogonResponse::rnd 返回
+  string rnd = 2;
+  // 由AccountLogonResponse::sess 返回
+  string sess = 3;
+  string logon_id = 4;
+  // Password使用Blowfish对称加密
+  // 加密步骤
+  // a, Use password to generate KEY1
+  // b, Use KEY1 to decrypt rnd & sess to recover RND & SESS
+  // c, Use SESS to generate KEY2
+  // d, Use KEY2 to encrypt RND to generate e2RND
+  string password = 5;
+}
+
+message AccountLogonVerifyResponse {
+  int32 request_id = 1;
+  ErrorCode error_code = 2;
+  string error_message = 3;
+}
+
+enum Direction {
+  BUY = 0;
+  SELL = 1;
+}
+
+enum OrderType {
+  MARKET_ORDER = 0;
+  LIMIT_ORDER = 1;
+}
+
+enum OrderStatus {
+  PENDING_SUBMIT = 0;
+  PRE_SUBMITTED = 1;
+  SUBMITTED = 2;
+  FILLED = 3;
+  CANCELLED = 4;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 创建订单
+message CreateOrderRequest {
+  int32 request_id = 1;
+  string account_id = 2;     //账号
+  string symbol = 3;         //产品
+  Direction direction = 4;   //买升买跌
+  OrderType order_type = 5;  //订单指示
+  double limit_price = 6;    //挂盘价
+  int32 qty = 7;             //开仓手数
+  int32 timestamp = 8;       //客户行情时间
+}
+
+message CreateOrderResponse {
+  int32 request_id = 1;
+  ErrorCode error_code = 2;  ///错误号
+  string order_no = 3;       ///订单号
+  string error_message = 4;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 撤销订单
+message CancelOrderRequest {
+  int32 request_id = 1;
+  string symbol = 2;  ///产品
+  string order_no = 3;
+}
+
+message CancelOrderResponse {
+  int32 request_id = 1;
+  ErrorCode error_code = 2;
+  string error_message = 3;
+  string order_no = 4;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+message Order {
+  string order_no = 1;
+  string symbol = 2;
+  Direction direction = 3;
+  OrderType order_type = 4;
+  double price = 5;
+  int32 qty = 6;
+  OrderStatus order_status = 7;
+  string input_datetime = 8;
+  int32 traded_qty = 9;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 订阅订单数据
+message SubscribeAccountOrder {
+  bool subscribe = 1;
+}
+
+message AccountOrderPush {
+  Order order = 1;
+}
+//////////////////////////////////////////////////////////////////////////////
+// 查询订单记录
+message QueryAccountOrderRequest {
+  int32 request_id = 1;
+}
+
+message QueryAccountOrderResponse {
+  int32 request_id = 1;
+  repeated Order orders = 2;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+message Trade {
+  string trade_id = 1;
+  string order_no = 2;
+  string symbol = 3;
+  Direction direction = 4;
+  double price = 5;
+  int32 qty = 6;
+  double commission = 7;          // **symbol**货币相关手续费
+  double settled_commission = 8;  // **symbol**结算手续(系统货币)
+  string datetime = 9;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 订阅成交记录
+message SubscribeAccountTrade {
+  bool subscribe = 1;
+}
+
+message AccountTradePush {
+  Trade trade = 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 查询交易记录
+message QueryAccountTradeRequest {
+  int32 request_id = 1;
+}
+
+message QueryAccountTradeResponse {
+  int32 request_id = 1;
+  repeated Trade trades = 2;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+message PositionItem {
+  string symbol = 1;
+  Direction direction = 2;
+  double average_price = 3;
+  int32 position = 4;
+  int32 closeable_position = 5;
+  double margin = 6;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 订阅持仓记录
+message SubscribeAccountPosition {
+  bool subscribe = 1;
+}
+
+message AccountPositionPush {
+  PositionItem position = 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 查询持仓记录
+message QueryAccountPositionRequest {
+  int32 request_id = 1;
+}
+
+message QueryAccountPositionResponse {
+  int32 request_id = 1;
+  repeated PositionItem positions = 2;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 订阅账户资金信息
+// IMPORT: 返回的都为系统货币
+message SubscribeAccountBalance {
+  bool subscribe = 1;
+}
+
+message AccountBalancePush {
+  double cash_balance = 1;       // 可用资金
+  double client_margin = 2;      // 保证金
+  double today_profit_loss = 3;  // 今日盈亏(结算)
+  double today_commission = 4;   // 今日手续费
+  double frozen_commission = 5;  // 冻结手续费
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// 查询账号所有产品我要赚列表
+message QueryAccountStopLossListRequest {
+  int32 request_id = 1;
+  string account_id = 2;  ///账号
+  string symbol = 3;      ///产品
+  int32 version = 4;      /// 1   = 账号相关 2 = 所有
+}
+
+message QueryAccountStopLossListResponse {
+  message StopLossData {
+    int32 seq_no = 1;     ///序号
+    int32 stop_loss = 2;  ///我要赚
+    int32 margin = 3;     ///保证金
+  }
+  string symbol = 1;                ///产品
+  StopLossData stop_loss_list = 2;  ///我要赚列表
+}
+
+//////////////////////////////////////////////////////////////////////////////
+message QuerySymbolListRequest {
+  int32 request_id = 1;
+}
+
+message QuerySymbolListResponse {
+  message SymbolInfo {
+    string symbol = 1;        // 产品名
+    int32 decimal = 2;        // 小数点位数
+    string currency = 3;      // 货币
+    string exchange = 4;      // 市场
+    string symbol_class = 5;  // 类别: HSI, MHI
+    string expiry_date = 6;   // 到期日
+    string en_symbol_name = 7;
+    string cn_symbol_name = 8;
+    string tw_symbol_name = 9;
+    int32 multiplier = 10;
+  }
+  int32 request_id = 1;
+  repeated SymbolInfo symbols = 2;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+message SubscribeAccountSymbolSettings {
+  bool subscribe = 1;
+}
+
+message AccountSymbolSettingsPush {
+  string currency = 1;
+  double currency_rate = 2;
+  message Settings {
+    string symbol = 1;
+    double margin = 2;
+  }
+  repeated Settings settings = 3;
+}
+
+message QuerySymbolClassListRequest {
+  int32 request_id = 1;
+}
+
+message SymbolClassDetail {
+  string symbol_class = 1;  // category
+  // Metal:贵金属;
+  // Equity Index: 股指期货
+  // Energy Chemical: 能源化工
+  // Agriculture: 农产品
+  // Commodity Index: 商品指数
+  // Cryptocurrency: 加密货币
+  // Dairy: 乳业
+  // Energy Index: 能源指数
+  // Equity Index Volatility: 股票波动指数
+  // Equity: 股票
+  // Fixed Income: 固收
+  // Foreign Exchange: 外汇
+  // Forest
+  // Housing
+  // Meat
+  // Money Market
+  // Weather
+  string future_type = 2;
+  string exchange = 3;
+  int32 decimal = 4;
+  string currency = 5;
+  int32 multiplier = 6;
+}
+
+message QuerySymbolClassListResponse {
+  int32 request_id = 1;
+  repeated SymbolClassDetail details = 2;
+}

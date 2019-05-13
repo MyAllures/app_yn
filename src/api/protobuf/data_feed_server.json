@@ -1,0 +1,285 @@
+{
+  "nested": {
+    "data_feed": {
+      "nested": {
+        "ApiId": {
+          "values": {
+            "HEARTBEAT": 0,
+            "SYMBOL_PRICE_INFO_PUSH": 16,
+            "SYMBOL_LAST_K_LINE_DATA_PUSH": 17,
+            "QUERY_SYMBOL_K_LINE_DATA_LIST": 18,
+            "SYMBOL_MARKET_DEPTH_PUSH": 21
+          }
+        },
+        "HeartbeatRequest": {
+          "fields": {}
+        },
+        "HeartbeatResponse": {
+          "fields": {}
+        },
+        "KLineType": {
+          "values": {
+            "KLINE_1_SECONDS": 0,
+            "KLINE_1_MINUTES": 1,
+            "KLINE_3_MINUTES": 2,
+            "KLINE_5_MINUTES": 3,
+            "KLINE_10_MINUTES": 4,
+            "KLINE_15_MINUTES": 5,
+            "KLINE_30_MINUTES": 6,
+            "KLINE_60_MINUTES": 7,
+            "KLINE_1_DAYS": 8
+          }
+        },
+        "SubscribeSymbolLastKLineData": {
+          "fields": {
+            "subscribe": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbol": {
+              "type": "string",
+              "id": 2
+            },
+            "kLineType": {
+              "type": "KLineType",
+              "id": 3
+            }
+          }
+        },
+        "SymbolLastKLineDataPush": {
+          "fields": {
+            "symbol": {
+              "type": "string",
+              "id": 1
+            },
+            "kLineType": {
+              "type": "KLineType",
+              "id": 2
+            },
+            "dateTime": {
+              "type": "int64",
+              "id": 3
+            },
+            "openPrice": {
+              "type": "float",
+              "id": 4
+            },
+            "closePrice": {
+              "type": "float",
+              "id": 5
+            },
+            "highPrice": {
+              "type": "float",
+              "id": 6
+            },
+            "lowPrice": {
+              "type": "float",
+              "id": 7
+            },
+            "volume": {
+              "type": "int32",
+              "id": 8
+            },
+            "timeStamp": {
+              "type": "int64",
+              "id": 9
+            },
+            "bidPrice": {
+              "type": "float",
+              "id": 10
+            },
+            "askPrice": {
+              "type": "float",
+              "id": 11
+            }
+          }
+        },
+        "KLineData": {
+          "fields": {
+            "dateTime": {
+              "type": "int64",
+              "id": 1
+            },
+            "openPrice": {
+              "type": "float",
+              "id": 2
+            },
+            "closePrice": {
+              "type": "float",
+              "id": 3
+            },
+            "highPrice": {
+              "type": "float",
+              "id": 4
+            },
+            "lowPrice": {
+              "type": "float",
+              "id": 5
+            },
+            "volume": {
+              "type": "int32",
+              "id": 6
+            }
+          }
+        },
+        "QuerySymbolKLineDataListRequest": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbol": {
+              "type": "string",
+              "id": 2
+            },
+            "kLineType": {
+              "type": "KLineType",
+              "id": 3
+            },
+            "autoSubscribe": {
+              "type": "int32",
+              "id": 4
+            }
+          }
+        },
+        "QuerySymbolKLineDataListResponse": {
+          "fields": {
+            "requestId": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbol": {
+              "type": "string",
+              "id": 2
+            },
+            "kLineType": {
+              "type": "KLineType",
+              "id": 3
+            },
+            "kLineList": {
+              "rule": "repeated",
+              "type": "KLineData",
+              "id": 4
+            }
+          }
+        },
+        "SubscribeSymbolPriceInfo": {
+          "fields": {
+            "subscribe": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbol": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "SymbolPriceInfoPush": {
+          "fields": {
+            "symbol": {
+              "type": "string",
+              "id": 1
+            },
+            "timeStamp": {
+              "type": "int64",
+              "id": 2
+            },
+            "lastPrice": {
+              "type": "float",
+              "id": 3
+            },
+            "lastQty": {
+              "type": "int32",
+              "id": 4
+            },
+            "prevClosePrice": {
+              "type": "float",
+              "id": 5
+            },
+            "openPrice": {
+              "type": "float",
+              "id": 6
+            },
+            "highPrice": {
+              "type": "float",
+              "id": 7
+            },
+            "lowPrice": {
+              "type": "float",
+              "id": 8
+            },
+            "volume": {
+              "type": "int32",
+              "id": 9
+            },
+            "bidPrice": {
+              "type": "float",
+              "id": 10
+            },
+            "askPrice": {
+              "type": "float",
+              "id": 11
+            },
+            "bidSize": {
+              "type": "int32",
+              "id": 12
+            },
+            "askSize": {
+              "type": "int32",
+              "id": 13
+            },
+            "decimal": {
+              "type": "int32",
+              "id": 14
+            }
+          }
+        },
+        "SubscribeSymbolMarketDepth": {
+          "fields": {
+            "subscribe": {
+              "type": "int32",
+              "id": 1
+            },
+            "symbol": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "MarketDepthData": {
+          "fields": {
+            "price": {
+              "type": "float",
+              "id": 1
+            },
+            "qty": {
+              "type": "int32",
+              "id": 2
+            }
+          }
+        },
+        "SymbolMarketDepthPush": {
+          "fields": {
+            "symbol": {
+              "type": "string",
+              "id": 1
+            },
+            "bid": {
+              "rule": "repeated",
+              "type": "MarketDepthData",
+              "id": 2
+            },
+            "ask": {
+              "rule": "repeated",
+              "type": "MarketDepthData",
+              "id": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}
