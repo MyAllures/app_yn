@@ -24,7 +24,7 @@ class RegisterScreen extends Component {
   textChange(key, val) {
     console.log(key, val)
     let tmp = {}
-    tem[key] = val
+    tmp[key] = val
     this.setState(tmp)
   }
   render() {
@@ -87,6 +87,9 @@ class RegisterScreen extends Component {
                 secureTextEntry={true}
                 maxLength={20}
                 placeholder='短信验证码' />
+              <TouchableOpacity>
+                <Text>发送验证码</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.inputGroup}>
               <View style={styles.inputImage}>
@@ -130,8 +133,8 @@ class RegisterScreen extends Component {
                 placeholder='邀请码 ( 可以不填 )'
                 onChangeText={(val) => this.textChange('phoneNumber', val)} />
             </View>
-            <View style={{flexDirection: 'row', marginTop: 10, marginBottom: 30}}>
-              <CheckBox checked={false} color="#BA403E"/>
+            <View style={styles.agreement}>
+              <CheckBox checked={false} color="#BA403E" style={{marginRight: 12, width: 15, height: 15}}/>
               <View style={{flexDirection: 'row'}}>
                 <Text style={{color: '#fff'}}>已阅读并同意</Text>
                 <Text style={{color: '#BA403E'}}>《注册协议与风险说明书》</Text>
@@ -182,6 +185,13 @@ const styles = StyleSheet.create({
     width: 58,
     height: 28,
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  agreement: {
+    flexDirection: 'row', 
+    marginTop: 10, 
+    marginBottom: 30, 
+    alignItems: 'center', 
     justifyContent: 'center'
   }
 })

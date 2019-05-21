@@ -3,8 +3,7 @@ import {
   StyleSheet,
   ScrollView,
   Text,
-  Alert,
-  AlertIOS
+  Alert
 } from 'react-native'
 
 import Page from '../common/Page.js'
