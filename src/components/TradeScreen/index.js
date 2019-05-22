@@ -10,57 +10,7 @@ import Page from '../common/Page.js'
 import getTheme from '../../../native-base-theme/components'
 import material from '../../../native-base-theme/variables/material'
 import CommonItem from './CommonItem'
-
-const tradeInfo = [
-  {
-    direction: '买升',
-    value: '-150',
-    futureType: '国指期货1811(YM)',
-    openPrice: '10599',
-    sum: '1',
-    maxStopLossPoint: '50',
-    detail: {
-      currentPL: '+17',
-      handingFee: '30.00',
-      margin: '5000.00',
-      openingDate: '2018-11-06 17:41:20',
-      validityPeriod: '当日有效',
-      orderNum: 'A0000120509'
-    }
-  },
-  {
-    direction: '买升',
-    value: '-150',
-    futureType: '国指期货1811(YM)',
-    openPrice: '10599',
-    sum: '1',
-    maxStopLossPoint: '50',
-    detail: {
-      currentPL: '+17',
-      handingFee: '30.00',
-      margin: '5000.00',
-      openingDate: '2018-11-06 17:41:20',
-      validityPeriod: '当日有效',
-      orderNum: 'A0000120509'
-    }
-  },
-  {
-    direction: '买跌',
-    value: '-150',
-    futureType: '国指期货1811(YM)',
-    openPrice: '10599',
-    sum: '1',
-    maxStopLossPoint: '50',
-    detail: {
-      currentPL: '+17',
-      handingFee: '30.00',
-      margin: '5000.00',
-      openingDate: '2018-11-06 17:41:20',
-      validityPeriod: '当日有效',
-      orderNum: 'A0000120509'
-    }
-  },
-]
+import AccordionCustomHeaderContent from './AccordionCustomHeaderContent'
 
 class TradeScreen extends Component {
   render() {
@@ -84,29 +34,30 @@ class TradeScreen extends Component {
         <ScrollView style={styles.main}>
           <View style={styles.header}>
             <View style={styles.headerText}>
-              <Text style={{color: "#999"}}>可用资金</Text>
-              <Text style={{color: "#fff"}}>93,812.57</Text>
+              <Text style={styles.textTitle}>可用资金</Text>
+              <Text style={styles.textValue}>93,812.57</Text>
             </View>
             <View style={styles.headerText}>
-              <Text style={{color: "#999"}}>浮动盈亏</Text>
-              <Text style={{color: "#BA403E"}}>-1,200.00</Text>
+              <Text style={styles.textTitle}>浮动盈亏</Text>
+              <Text style={styles.textValue}>-1,200.00</Text>
             </View>
             <View style={styles.headerText}>
-              <Text style={{color: "#999"}}>占用保证金</Text>
-              <Text style={{color: "#fff"}}>6,187.43</Text>
+              <Text style={styles.textTitle}>占用保证金</Text>
+              <Text style={styles.textValue}>6,187.43</Text>
             </View>
           </View>
           <Container style={styles.tabContainer}>
             <StyleProvider style={getTheme(material)}>
               <Tabs tabBarUnderlineStyle={{width: 55, height: 2, marginLeft: 35}}>
                 <Tab heading={ <TabHeading><Text>持仓</Text></TabHeading>}>
-                  { tradeInfo.map((item, index) => <CommonItem trade={item} key={index} />) }
+                  {/* { tradeInfo.map((item, index) => <CommonItem trade={item} key={index} />) } */}
+                  <AccordionCustomHeaderContent />
                 </Tab>
                 <Tab heading={ <TabHeading><Text>已结算</Text></TabHeading>}>
-                  <Text>Camera</Text>
+                  <AccordionCustomHeaderContent />
                 </Tab>
                 <Tab heading={ <TabHeading><Text>触发单</Text></TabHeading>}>
-                  <Text>Camera</Text>
+                  <AccordionCustomHeaderContent />
                 </Tab>
               </Tabs>
             </StyleProvider>
@@ -124,13 +75,22 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    height: 40,
-    backgroundColor: '#20212A'
+    backgroundColor: '#20212A',
+    paddingTop: 10,
+    paddingBottom: 10
   },
   headerText: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textTitle: {
+    color: '#999',
+    fontSize: 15
+  },
+  textValue: {
+    color: '#fff',
+    fontSize: 15
   },
   tabContainer: {
     marginTop: 2

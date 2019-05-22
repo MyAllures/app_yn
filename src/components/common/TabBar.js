@@ -79,7 +79,7 @@ class TabBar extends Component {
       return (
         <Link 
           to={item.to}
-          component={TouchableOpacity}
+          // component={TouchableOpacity}
           style={[styles.tabItem]} 
           key={index}>
           <View style={[styles.tabItem]}>
