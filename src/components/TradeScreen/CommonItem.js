@@ -87,7 +87,7 @@ const tradeInfo = [
   },
 ]
 
-export default class AccordionCustomHeaderContent extends Component {
+export default class CommonItem extends Component {
 
 	// constructor(props) {
   //   super(props);

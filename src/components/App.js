@@ -10,6 +10,7 @@ import RegisterScreen from './RegisterScreen.js'
 import SettingScreen from './MeScreen/SettingScreen.js'
 import AboutBBNScreen from './MeScreen/AboutBBNScreen.js'
 import FuturesAccountScreen from './MeScreen/FuturesAccountScreen.js'
+import StockFuturesScreen from './QuotesScreen/StockFuturesScreen.js'
 
 import store from '../store/configure-store.js'
 import * as action from '../action/index'
@@ -73,7 +74,7 @@ class App extends Component {
       store.dispatch(action.reconnect())
       Toast.show('业务服务器连接中断 ', {
         duration: 3000,
-        position: Toast.positions.TOP,
+        position: Toast.positions.BOTTOM,
         shadow: true,
         animation: true,
         hideOnPress: true,
@@ -165,6 +166,7 @@ class App extends Component {
         <Route path="/Setting" component={SettingScreen} />
         <Route path="/About-BBN" component={ AboutBBNScreen } />
         <Route path="/Futures-Account" component={ FuturesAccountScreen } />
+        <Route path="/Stock-Futures" component={ StockFuturesScreen } />
       </View>
     )
   }

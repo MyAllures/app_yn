@@ -49,6 +49,7 @@ const myBarData = [
 class SettingScreen extends Component {
 	pressHandle(params) {
 		const { history } = this.props
+		console.log(history)
 		history.push(params)
 	}
 	render() {
@@ -61,7 +62,8 @@ class SettingScreen extends Component {
 			},
 			tabBar: {
 				type: '',
-				visible: false
+				visible: false,
+				footerVisible: true
 			}
 		}
 		const myBar = myBarData.map((item, index) => {

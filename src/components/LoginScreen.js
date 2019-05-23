@@ -78,7 +78,8 @@ class LoginScreen extends Component {
       },
       tabBar: {
         type: '',
-        visible: false
+        visible: false,
+        footerVisible: true
       }
     }
     return (

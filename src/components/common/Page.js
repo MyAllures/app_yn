@@ -21,7 +21,8 @@ class Page extends Component {
         <View style={styles.body}>
           {children}
         </View>
-        { tabBar.visible ? (<TabBar type={tabBar.type}/>) : footerContext }
+        {/* { tabBar.visible ? (<TabBar type={tabBar.type}/>) : footerContext } */}
+        { tabBar.visible ? (<TabBar type={tabBar.type}/>) : (tabBar.footerVisible ? footerContext : null) }
       </View>
     )
     return context

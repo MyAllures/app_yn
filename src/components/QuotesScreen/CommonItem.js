@@ -4,15 +4,24 @@ import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 const propTypes = {
-	contract: PropTypes.object
+	contract: PropTypes.object,
+	history: PropTypes.func
 }
 
 class CommonItem extends Component {
+	pressHandle(path) {
+		const { history } = this.props
+    history.push(path)
+	}
+
 	render () {
 		const {contract} = this.props
 		return (
 			<View style={styles.content}>
-				<TouchableOpacity style={styles.header}>
+				<TouchableOpacity 
+					style={styles.header} 
+					onPress={() => this.pressHandle(contract.path)}
+				>
 					<View style={styles.headerLeft}>
 						<View style={styles.icon}></View>
 						<Text style={styles.title}>{contract.title}</Text>

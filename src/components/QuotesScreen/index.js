@@ -10,6 +10,7 @@ import Spot from './Spot'
 const contractData = [
   {
     title: '股指期货',
+    path: '/Stock-Futures',
     exponent: [
       {
         name: 'A50指数',
@@ -191,7 +192,7 @@ class QuotesScreen extends Component {
                 <Tab heading={ <TabHeading><Text>合约种类</Text></TabHeading>}>
                   {
                     contractData.map((contract, index) => {
-                      return <CommonItem contract={contract} key={index}/>
+                      return <CommonItem contract={contract} key={index} history={this.props.history}/>
                     })
                   }
                 </Tab>

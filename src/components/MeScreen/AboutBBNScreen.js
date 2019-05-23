@@ -60,7 +60,8 @@ class AboutBBNScreen extends Component {
 			},
 			tabBar: {
 				type: '',
-				visible: false
+				visible: false,
+				footerVisible: true
 			}
 		}
 		const myBar = myBarData.map((item, index) => {
