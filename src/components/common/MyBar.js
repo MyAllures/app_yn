@@ -83,10 +83,8 @@ class MyBar extends Component {
     let context = (
       <TouchableOpacity
         style={wrap}
-        onPress={(e) => {
-          this._onPressHandle(e)
-          // this._alertHandle()
-          }}>
+        onPress={ (e) => {this._onPressHandle(e)} }
+      >
         <View style={[styles.wrap, styles.list, wrap]}>
           {content}
           {onPress ? handle : null}

@@ -9,7 +9,6 @@ import {
 import Page from '../common/Page.js'
 import getTheme from '../../../native-base-theme/components'
 import material from '../../../native-base-theme/variables/material'
-import CommonItem from './CommonItem'
 import AccordionCustomHeaderContent from './AccordionCustomHeaderContent'
 
 class TradeScreen extends Component {
@@ -50,7 +49,6 @@ class TradeScreen extends Component {
             <StyleProvider style={getTheme(material)}>
               <Tabs tabBarUnderlineStyle={{width: 55, height: 2, marginLeft: 35}}>
                 <Tab heading={ <TabHeading><Text>持仓</Text></TabHeading>}>
-                  {/* { tradeInfo.map((item, index) => <CommonItem trade={item} key={index} />) } */}
                   <AccordionCustomHeaderContent />
                 </Tab>
                 <Tab heading={ <TabHeading><Text>已结算</Text></TabHeading>}>
