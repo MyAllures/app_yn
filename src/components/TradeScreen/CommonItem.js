@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Icon, Accordion, Text, View } from "native-base"
 import { StyleSheet, Image, TouchableOpacity, Button } from 'react-native'
+import PropTypes from 'prop-types'
 
 import AlertAndroid from '../common/AlertAndroid' // 封装好的仿IOS的 alert组件
 
@@ -87,19 +88,20 @@ const tradeInfo = [
   },
 ]
 
+
 export default class CommonItem extends Component {
-
-	// constructor(props) {
-  //   super(props);
-
-  //   this._closeAllPosition = this._closeAllPosition.bind(this);
-  // }
+	constructor(props) {
+		super(props);
+		this._closeAllPosition = this._closeAllPosition.bind(this)
+		this._renderContent = this._renderContent.bind(this)
+	}
 
 	_closeAllPosition() {
-		console.log(111)
+		console.log('点击了')
 	}
 
   _renderHeader(trade, expanded) {
+		
     return (
 			<View style={styles.header}>
 				<View style={styles.headerLeft}>
@@ -207,15 +209,16 @@ export default class CommonItem extends Component {
 					</View>
 				</View> 
 
-				<TouchableOpacity style={styles.positionItem} touchableHandlePress={ () => this._closeAllPosition }>
-					<Text style={styles.positionText}>全部平仓 10617</Text>
+				<TouchableOpacity style={styles.positionItem} onPress={()=> this._closeAllPosition()}>
+					<Text style={styles.positionText} >全部平仓</Text>
 				</TouchableOpacity>
-			</View>
+			</View> 
     )
 	}
 	
   render() {
 		const alertAndroid = <AlertAndroid ref="alertAndroid" />
+
     return (
       <Container>
 				<Accordion
@@ -225,9 +228,11 @@ export default class CommonItem extends Component {
 					expanded={true}
 					renderHeader={this._renderHeader}
 					renderContent={this._renderContent}
-					
-				/>
+					>
+				</Accordion>
 				{alertAndroid}
+
+
       </Container>
     )
   }
