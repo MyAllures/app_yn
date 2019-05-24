@@ -24,7 +24,7 @@ class StockFuturesScreen extends Component {
 				tabBar={option.tabBar}
 			>
 				<ScrollView style={styles.main}>
-					<More />
+					<More history={this.props.history}/>
 				</ScrollView>
 			</Page>
 		)

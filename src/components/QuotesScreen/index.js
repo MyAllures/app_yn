@@ -199,7 +199,7 @@ class QuotesScreen extends Component {
                 <Tab heading={ <TabHeading><Text>交易所</Text></TabHeading>}>
                   {
                     contractData.map((contract, index) => {
-                      return <CommonItem contract={contract} key={index}/>
+                      return <CommonItem contract={contract} key={index} history={this.props.history}/>
                     })
                   }
                 </Tab>

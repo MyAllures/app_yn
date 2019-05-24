@@ -91,8 +91,7 @@ const tradeInfo = [
 
 export default class CommonItem extends Component {
 	constructor(props) {
-		super(props);
-		this._closeAllPosition = this._closeAllPosition.bind(this)
+		super(props)
 		this._renderContent = this._renderContent.bind(this)
 	}
 

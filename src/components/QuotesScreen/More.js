@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { Container, Header, Content, Icon, Accordion, Text, View } from "native-base"
+import PropTypes from 'prop-types'
 
 const futuresData = [
 	{
@@ -157,7 +158,23 @@ const futuresData = [
 	},
 ]
 
+const propTypes = {
+	history: PropTypes.object
+}
+
+
 class More extends Component {
+	constructor (props) {
+		super(props)
+		this._renderContent = this._renderContent.bind(this)
+		
+	}
+
+	loadKLine() {
+		const { history } = this.props
+		history.push('/K-Line')
+	}
+
 	_renderHeader (futures, expanded) {
 		return (
 			<View style={styles.header}>
@@ -183,7 +200,7 @@ class More extends Component {
 				{
 					future.info.map((info, index) => {
 						return (
-							<View style={styles.contentBody} key={index}>
+							<TouchableOpacity style={styles.contentBody} key={index} onPress={()=> this.loadKLine()}>
 								<View style={styles.bodyLeft}>
 									<View style={styles.categoryWrap}>
 										<View style={styles.symbolBg}>
@@ -203,7 +220,7 @@ class More extends Component {
 									<Text style={info.rf > 0 ? {color: '#00CC00'} : (info.rf == 0 ? {color: '#fff'} : {color: '#AB3333'})}>{info.rf}</Text>
 									<Text style={info.rf > 0 ? {color: '#00CC00'} : (info.rf == 0 ? {color: '#fff'} : {color: '#AB3333'})}>{info.rfPercent}</Text>
 								</View>
-							</View>
+							</TouchableOpacity>
 						)
 					})
 				}

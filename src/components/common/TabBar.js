@@ -33,28 +33,43 @@ const titles = [
   }
 ]
 
-const dynamicTitles = [
+const kLineTitles = [
   {
-    icon: 'phone',
-    title: '咨询',
-    to: '/Advisory',
-    img: require('../../assets/icon-advisory-0.png'),
-    active: require('../../assets/icon-advisory.png')
+    icon: 'quotes',
+    title: '自选',
+    // to: '/Quotes',
+    img: require('../../assets/icon-quotes-0.png'),
+    active: require('../../assets/icon-quotes.png')
+  },
+  {
+    icon: 'trade',
+    title: '交易',
+    // to: '/Trade',
+    img: require('../../assets/icon-trade-0.png'),
+    active: require('../../assets/icon-trade.png')
+  },
+  {
+    icon: 'account',
+    title: '设置',
+    // to: '/Me',
+    img: require('../../assets/icon-setting.png'),
+    active: require('../../assets/icon-setting.png')
   }
 ]
 
 class TabBar extends Component {
   titleData() {
     const { type } = this.props
-    const ret = [].concat(titles)
+    let ret = titles
     switch (type) {
-      case 'Advisory':
-        ret.push(dynamicTitles[0])
+      case 'KLine':
+        return ret = kLineTitles
         break
       default:
+        return ret
         break
     }
-    return ret
+    
   }
   imgSize(size) {
     return {

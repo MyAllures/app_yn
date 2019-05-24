@@ -9,9 +9,18 @@ const propTypes = {
 }
 
 class CommonItem extends Component {
-	pressHandle(path) {
+	constructor (props) {
+		super(props)
+		this.loadKLine = this.loadKLine.bind(this)
+	}
+	loadMore(path) {
 		const { history } = this.props
     history.push(path)
+	}
+
+	loadKLine() {
+		const { history } = this.props
+		history.push('/K-Line')
 	}
 
 	render () {
@@ -20,7 +29,7 @@ class CommonItem extends Component {
 			<View style={styles.content}>
 				<TouchableOpacity 
 					style={styles.header} 
-					onPress={() => this.pressHandle(contract.path)}
+					onPress={() => this.loadMore(contract.path)}
 				>
 					<View style={styles.headerLeft}>
 						<View style={styles.icon}></View>
@@ -37,20 +46,23 @@ class CommonItem extends Component {
 				<View style={styles.main}>
 					{
 						contract.exponent.map((exponent, index) => {
-							return  <LinearGradient
-												key={index}
-												start={{x: 0.25, y: 0.25}}
-    										end={{x: 0.75, y: 0.75}}
-												locations={[ 0.4, 0.5, 0.6 ]}
-												colors={exponent.pl > 0 ? ['#00CC00', '#069900', '#009900'] : (exponent.pl == 0 ? ['#C9C9C9', '#A1A1A1', '#A1A1A1'] : ['#791924', '#67161F', '#67161F']) }
-												style={styles.linearGradient}>
-												<Text style={styles.exponentText}>{exponent.name}</Text>
-												<Text style={styles.exponentText}>{exponent.value}</Text>
-												<View style={{flexDirection: 'row'}}>
-													<Text style={styles.exponentText}>{exponent.pl}</Text>
-													<Text style={[styles.exponentText, {marginLeft: 8}]}>{exponent.percent}</Text>
-												</View>
-											</LinearGradient>
+							return  <TouchableOpacity key={index} onPress={() => this.loadKLine()}>
+												<LinearGradient
+													start={{x: 0.25, y: 0.25}}
+													end={{x: 0.75, y: 0.75}}
+													locations={[ 0.4, 0.5, 0.6 ]}
+													colors={exponent.pl > 0 ? ['#00CC00', '#069900', '#009900'] : (exponent.pl == 0 ? ['#C9C9C9', '#A1A1A1', '#A1A1A1'] : ['#791924', '#67161F', '#67161F']) }
+													style={styles.linearGradient}
+												>
+													<Text style={styles.exponentText}>{exponent.name}</Text>
+													<Text style={styles.exponentText}>{exponent.value}</Text>
+													<View style={{flexDirection: 'row'}}>
+														<Text style={styles.exponentText}>{exponent.pl}</Text>
+														<Text style={[styles.exponentText, {marginLeft: 8}]}>{exponent.percent}</Text>
+													</View>
+												</LinearGradient>
+											</TouchableOpacity>
+											
 						})
 					}
 					
