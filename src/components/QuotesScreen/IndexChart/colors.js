@@ -1,0 +1,6 @@
+export const Red = '#d0221f'
+export const Green = '#206e2f'
+export const ORed = '#9c2e10'
+export const OGreen = '#3d8e7e'
+export const OptionsPrimary = '#0a5178'
+export const OptionsDanger = '#ad1136'
