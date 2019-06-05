@@ -7,7 +7,6 @@ import material from '../../../native-base-theme/variables/material'
 import News from './News'
 import MarketRelated from './MarketRelated'
 import ContractInfo from './ContractInfo'
-import {BarChart, CombinedChart} from 'react-native-charts-wrapper'
 import IndexChart from './IndexChart/index'
 
 const minuteData = {data: [
@@ -1128,71 +1127,10 @@ class KLineScreen extends Component {
               newLine={minuteData}
               // newLine={dayData}
               curType="MACD"
+              changeFull={true}
               // curData={minuteData}
             />
-
-            {/* <WebView
-              ref="chart"
-              scrollEnabled = {false}
-              javaScriptEnabled = {true}
-              source={{uri:'http://192.168.8.133:8099/'}}
-              // source={{uri: 'file:///android_asset/index.html'}}
-              // source={{uri:'http://blog.csdn.net'}}
-              // onLoad={()=>this.onLoadHandle()}
-              style={[{flex: 1, backgroundColor: '#1b1b1b'}]}
-              // onMessage={(e)=>this.onMessageHandle(e)}
-            /> */}
-
-            {/* <View style={styles.mode}>
-              {
-                mode.map((mode, index) => {
-                  return (
-                    <TouchableOpacity key={index} onPress={() => this.select(mode)}>
-                      <Text style={{color: this.state.active === mode ? '#CC3333' : '#fff'}}>{mode}</Text>
-                    </TouchableOpacity>
-                  )
-                })
-              }
-            </View>
-
-
-              <View style={styles.dataList}>
-
-              </View>
-
-            </View> */}
-						
-						{/* <Container style={{marginTop: 6}}>
-							<Accordion
-								style={{ backgroundColor: "#1B1B1B" }}
-								dataArray={futuresData}
-								animation={true}
-								expanded={true}
-								renderHeader={this._renderHeader}
-								renderContent={this._renderContent}
-							/>
-						</Container> */}
-
-						{/* <View style={styles.kLineInfo}>
-							<View style={styles.item}>
-								<Text>最高</Text>
-								<Text>2723.00</Text>
-							</View>
-							<View>
-								<Text>最低</Text>
-								<Text>2713.00</Text>
-							</View>
-							<View>
-								<Text>成交量</Text>
-								<Text>20324</Text>
-							</View>
-							<TouchableOpacity>
-								<Image source={require('../../assets/icon-arrow-4.png')} style={styles.arrow}/>
-							</TouchableOpacity>
-						</View> */}
           </View>
-
-
 
           <Container style={styles.tabContainer}>
             <StyleProvider style={getTheme(material)}>

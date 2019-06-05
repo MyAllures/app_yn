@@ -1,11 +1,9 @@
 package com.app;
-import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
-import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -28,9 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNCWebViewPackage(),
-            new MPAndroidChartPackage(),
-            new LinearGradientPackage(),
-            new MPAndroidChartPackage()
+            new LinearGradientPackage()
       );
     }
 

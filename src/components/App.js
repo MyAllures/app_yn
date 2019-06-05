@@ -12,6 +12,7 @@ import AboutBBNScreen from './MeScreen/AboutBBNScreen.js'
 import FuturesAccountScreen from './MeScreen/FuturesAccountScreen.js'
 import StockFuturesScreen from './QuotesScreen/StockFuturesScreen.js'
 import KLineScreen from './QuotesScreen/KLineScreen.js'
+import MarketOrderScreen from './MarketOrderScreen/index.js'
 
 import store from '../store/configure-store.js'
 import * as action from '../action/index'
@@ -158,7 +159,7 @@ class App extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <Route exact path="/" component={QuotesScreen} />
+        <Route exact path="/" component={MarketOrderScreen} />
         <Route path="/Me" component={MeScreen} />
         <Route path="/Trade" component={TradeScreen} />
         <Route path="/Quotes" component={QuotesScreen} />
@@ -169,6 +170,7 @@ class App extends Component {
         <Route path="/Futures-Account" component={ FuturesAccountScreen } />
         <Route path="/Stock-Futures" component={ StockFuturesScreen } />
         <Route path="/K-Line" component={ KLineScreen } />
+        <Route path="/Market-Order" component={ MarketOrderScreen } />
       </View>
     )
   }

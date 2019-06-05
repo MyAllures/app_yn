@@ -44,7 +44,7 @@ const kLineTitles = [
   {
     icon: 'trade',
     title: '交易',
-    // to: '/Trade',
+    to: '/Market-Order',
     img: require('../../assets/icon-trade-0.png'),
     active: require('../../assets/icon-trade.png')
   },
