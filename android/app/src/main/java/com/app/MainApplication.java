@@ -3,6 +3,7 @@ package com.app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.surajit.rnpv.SRSPickerViewPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SRSPickerViewPackage(),
             new RNCWebViewPackage(),
             new LinearGradientPackage()
       );
