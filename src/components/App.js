@@ -159,7 +159,7 @@ class App extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <Route exact path="/" component={MarketOrderScreen} />
+        <Route exact path="/" component={TradeScreen} />
         <Route path="/Me" component={MeScreen} />
         <Route path="/Trade" component={TradeScreen} />
         <Route path="/Quotes" component={QuotesScreen} />

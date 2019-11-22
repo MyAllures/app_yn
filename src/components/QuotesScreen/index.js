@@ -6,6 +6,7 @@ import getTheme from '../../../native-base-theme/components'
 import material from '../../../native-base-theme/variables/material'
 import CommonItem from './CommonItem'
 import Spot from './Spot'
+import * as url from '../../constants/Url'
 
 const contractData = [
   {
@@ -168,7 +169,15 @@ const spotData = [
 ]
 
 class QuotesScreen extends Component {
+  constructor (props) {
+    super()
+    this.state = {
+      contractList: [],
+      exchangeList: []
+    }
+  }
   render() {
+    const { contractList, exchangeList } = this.state
     const options = {
       header: {
         title: '行情',
@@ -190,18 +199,20 @@ class QuotesScreen extends Component {
             <StyleProvider style={getTheme(material)}>
               <Tabs tabBarUnderlineStyle={{width: 55, height: 2, marginLeft: 35}}>
                 <Tab heading={ <TabHeading><Text>合约种类</Text></TabHeading>}>
-                  {
+                  {/* {
                     contractData.map((contract, index) => {
                       return <CommonItem contract={contract} key={index} history={this.props.history}/>
                     })
-                  }
+                  } */}
+                  <CommonItem list={contractList} history={this.props.history}/>
                 </Tab>
                 <Tab heading={ <TabHeading><Text>交易所</Text></TabHeading>}>
-                  {
+                  {/* {
                     contractData.map((contract, index) => {
                       return <CommonItem contract={contract} key={index} history={this.props.history}/>
                     })
-                  }
+                  } */}
+                  <CommonItem list={exchangeList} history={this.props.history}/>
                 </Tab>
                 <Tab heading={ <TabHeading><Text>现货</Text></TabHeading>}>
                   {
@@ -216,6 +227,25 @@ class QuotesScreen extends Component {
         </ScrollView>
       </Page>
     )
+  }
+  componentDidMount () {
+    fetch(url.CONTRACT_LIST)
+      .then(res => res.json())
+      .then(response => {
+        console.log('合约列表:', response)
+        const contractList = response.map(item => {
+          const obj = JSON.parse(JSON.stringify(item))
+          delete obj.exchange
+          return obj
+        })
+
+        const exchangeList = response.map(item => {
+          const obj = JSON.parse(JSON.stringify(item))
+          delete obj.type
+          return obj
+        })
+        this.setState({contractList, exchangeList})
+      })
   }
 }
 

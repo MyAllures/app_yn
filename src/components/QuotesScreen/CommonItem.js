@@ -5,7 +5,8 @@ import LinearGradient from 'react-native-linear-gradient'
 
 const propTypes = {
 	contract: PropTypes.object,
-	history: PropTypes.func
+	history: PropTypes.func,
+	list: PropTypes.array
 }
 
 class CommonItem extends Component {
@@ -24,52 +25,95 @@ class CommonItem extends Component {
 	}
 
 	render () {
-		const {contract} = this.props
+		const {contract, list} = this.props
 		return (
-			<View style={styles.content}>
+			<View>
+				{
+					list.map((item, index) => {
+						return (
+							<View style={styles.content} key={index}>
+								<TouchableOpacity 
+									style={styles.header} 
+									onPress={() => this.loadMore('/Stock-Futures')}
+								>
+									<View style={styles.headerLeft}>
+										<View style={styles.icon}></View>
+										<Text style={styles.title}>{ item.type || item.exchange }</Text>
+									</View>
+									<View style={styles.headerRight}>
+										<Text style={styles.more}>更多</Text>
+										<Image 
+											source={require('../../assets/icon-arrow-2.png')}
+											style={styles.img}
+										/>
+									</View>
+								</TouchableOpacity>
+								<View style={styles.main}>
+									<TouchableOpacity key={index} onPress={() => this.loadKLine()}>
+										<LinearGradient
+											start={{x: 0.25, y: 0.25}}
+											end={{x: 0.75, y: 0.75}}
+											locations={[ 0.4, 0.5, 0.6 ]}
+											colors={['#00CC00', '#069900', '#009900']}
+											style={styles.linearGradient}
+										>
+											<Text style={styles.exponentText}>{item.contract}</Text>
+											<Text style={styles.exponentText}>{20}</Text>
+											<View style={{flexDirection: 'row'}}>
+												<Text style={styles.exponentText}>{20}</Text>
+												<Text style={[styles.exponentText, {marginLeft: 8}]}>{20}</Text>
+											</View>
+										</LinearGradient>
+									</TouchableOpacity>
+								</View>
+							</View>
+						)
+					})
+				}
+
+			{/* <View style={styles.content}>
 				<TouchableOpacity 
-					style={styles.header} 
-					onPress={() => this.loadMore(contract.path)}
-				>
-					<View style={styles.headerLeft}>
-						<View style={styles.icon}></View>
-						<Text style={styles.title}>{contract.title}</Text>
+						style={styles.header} 
+						onPress={() => this.loadMore(contract.path)}
+					>
+						<View style={styles.headerLeft}>
+							<View style={styles.icon}></View>
+							<Text style={styles.title}>{contract.title}</Text>
+						</View>
+						<View style={styles.headerRight}>
+							<Text style={styles.more}>更多</Text>
+							<Image 
+								source={require('../../assets/icon-arrow-2.png')}
+								style={styles.img}
+							/>
+						</View>
+					</TouchableOpacity>
+					<View style={styles.main}>
+						{
+							contract.exponent.map((exponent, index) => {
+								return  (
+									<TouchableOpacity key={index} onPress={() => this.loadKLine()}>
+										<LinearGradient
+											start={{x: 0.25, y: 0.25}}
+											end={{x: 0.75, y: 0.75}}
+											locations={[ 0.4, 0.5, 0.6 ]}
+											colors={exponent.pl > 0 ? ['#00CC00', '#069900', '#009900'] : (exponent.pl == 0 ? ['#C9C9C9', '#A1A1A1', '#A1A1A1'] : ['#791924', '#67161F', '#67161F']) }
+											style={styles.linearGradient}
+										>
+											<Text style={styles.exponentText}>{exponent.name}</Text>
+											<Text style={styles.exponentText}>{exponent.value}</Text>
+											<View style={{flexDirection: 'row'}}>
+												<Text style={styles.exponentText}>{exponent.pl}</Text>
+												<Text style={[styles.exponentText, {marginLeft: 8}]}>{exponent.percent}</Text>
+											</View>
+										</LinearGradient>
+									</TouchableOpacity>
+								)
+							})
+						}
 					</View>
-					<View style={styles.headerRight}>
-						<Text style={styles.more}>更多</Text>
-						<Image 
-							source={require('../../assets/icon-arrow-2.png')}
-							style={styles.img}
-						/>
-					</View>
-				</TouchableOpacity>
-				<View style={styles.main}>
-					{
-						contract.exponent.map((exponent, index) => {
-							return  <TouchableOpacity key={index} onPress={() => this.loadKLine()}>
-												<LinearGradient
-													start={{x: 0.25, y: 0.25}}
-													end={{x: 0.75, y: 0.75}}
-													locations={[ 0.4, 0.5, 0.6 ]}
-													colors={exponent.pl > 0 ? ['#00CC00', '#069900', '#009900'] : (exponent.pl == 0 ? ['#C9C9C9', '#A1A1A1', '#A1A1A1'] : ['#791924', '#67161F', '#67161F']) }
-													style={styles.linearGradient}
-												>
-													<Text style={styles.exponentText}>{exponent.name}</Text>
-													<Text style={styles.exponentText}>{exponent.value}</Text>
-													<View style={{flexDirection: 'row'}}>
-														<Text style={styles.exponentText}>{exponent.pl}</Text>
-														<Text style={[styles.exponentText, {marginLeft: 8}]}>{exponent.percent}</Text>
-													</View>
-												</LinearGradient>
-											</TouchableOpacity>
-											
-						})
-					}
-					
-				</View>
-				
+				</View> */}
 			</View>
-			
 		)
 	}
 }

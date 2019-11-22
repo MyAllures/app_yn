@@ -3,7 +3,8 @@ import {
   StyleSheet,
   ImageBackground,
   StatusBar,
-  View
+  View,
+  ScrollView
 } from 'react-native'
 
 import Header from './Header.js'
