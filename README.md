@@ -8,7 +8,7 @@ yarn install
 
 # 运行
 react-native run-android 安卓
-<br />
+
 react-native run-ios     ios
 ```
 
